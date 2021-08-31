@@ -3,7 +3,7 @@ package com.felixin.random.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "NUMBER_TB")
+@Table(name = "TB_NUMBER")
 public class Number {
 
 
