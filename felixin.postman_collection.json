@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "7f6d4dd5-e5db-44f8-987d-0bf4508d314a",
+		"name": "felixin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/numbers/admin/generate",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlhdCI6MTYzMDQ0NTkyMywiZXhwIjoxNjMwNDQ2MjIzfQ.lRSHjfKVpp4zMN9SOYTtuBgAaDcTYFC8EduQJ2eLybg"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/numbers/admin/generate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"numbers",
+						"admin",
+						"generate"
+					]
+				},
+				"description": "generate 1000 number between 3000000 to 6000000"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/numbers/user/check-number/4585201",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlhdCI6MTYzMDQ0NTkyMywiZXhwIjoxNjMwNDQ2MjIzfQ.lRSHjfKVpp4zMN9SOYTtuBgAaDcTYFC8EduQJ2eLybg"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/numbers/user/check-number/4585201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"numbers",
+						"user",
+						"check-number",
+						"4585201"
+					]
+				},
+				"description": "check-number and return nearest 10 numer smaller and 10 number bigger"
+			},
+			"response": []
+		}
+	]
+}
