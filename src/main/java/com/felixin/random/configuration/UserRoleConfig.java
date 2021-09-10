@@ -26,10 +26,9 @@ public class UserRoleConfig {
         Role userRole = new Role();
         adminRole.setName(RoleType.ROLE_ADMIN);
         userRole.setName(RoleType.ROLE_USER);
+        roleRepository.deleteAll();
         roleRepository.save(adminRole);
         roleRepository.save(userRole);
-
-        userService.deleteAllUsers();
 
         SingUpDTO admin = new SingUpDTO();
         admin.setUsername("admin");
@@ -39,8 +38,6 @@ public class UserRoleConfig {
         adminRoles.add(RoleType.ROLE_USER);
         admin.setRoleType(adminRoles);
 
-        userService.signUp(admin);
-
         SingUpDTO user1 = new SingUpDTO();
         user1.setUsername("user");
         user1.setPassword("123");
@@ -48,6 +45,9 @@ public class UserRoleConfig {
         Set<RoleType> userRoles = new HashSet();
         userRoles.add(RoleType.ROLE_USER);
         user1.setRoleType(userRoles);
+
+        userService.deleteAllUsers();
+        userService.signUp(admin);
         userService.signUp(user1);
     }
 
