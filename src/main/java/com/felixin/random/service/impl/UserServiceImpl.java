@@ -10,6 +10,7 @@ import com.felixin.random.enums.UserStatus;
 import com.felixin.random.exception.CustomException;
 import com.felixin.random.repository.UserRepository;
 import com.felixin.random.security.JwtTokenProvider;
+import com.felixin.random.service.RoleService;
 import com.felixin.random.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,14 +32,15 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final RoleService roleService;
 
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager, RoleService roleService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
-
+        this.roleService = roleService;
     }
 
     @Override
@@ -61,15 +64,21 @@ public class UserServiceImpl implements UserService {
 
             Set<RoleType> roleType = singUpDTO.getRoleType();
             Set<Role> roles = new HashSet<>();
-            roleType.forEach(r -> {
-                Role role = new Role();
-                role.setName(r);
-                roles.add(role);
-            });
             user.setUsername(singUpDTO.getUsername());
             user.setRoles(roles);
             user.setPassword(passwordEncoder.encode(singUpDTO.getPassword()));
-            User savedUser = userRepository.save(user);
+
+            userRepository.save(user);
+
+            roleType.forEach(r -> {
+                Optional<Role> role = roleService.findByName(r);
+                role.ifPresent(roles::add);
+            });
+
+            User byUsername = userRepository.findByUsername(singUpDTO.getUsername());
+            byUsername.setRoles(roles);
+            User savedUser = userRepository.save(byUsername);
+
             String token = jwtTokenProvider.createToken(savedUser.getUsername(), savedUser.getRoles());
             return new JwtTokenDTO(token);
         } else {

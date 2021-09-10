@@ -6,17 +6,26 @@ spring:
   profiles:
     active: dev
   datasource:
+  # driver-class-name: org.postgresql.Driver
+  # driver-class-name: org.h2.Driver
     driverClassName: org.apache.derby.jdbc.EmbeddedDriver
+  # url: jdbc:postgresql://localhost:5432/shopping
+  # url: jdbc:h2:mem:random
     url: jdbc:derby:local;create=true
-    username: sa
-    password:
+    username: admin
+    password: 123
   jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: false
+    hibernate:
+      ddl-auto:  update # When you launch the application for the first time - switch "none" at "create"
     show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.DerbyTenSevenDialect
+  # database: h2
+  # database: postgresql
+    database-platform: org.hibernate.dialect.DerbyTenSevenDialect
+  # database-platform: org.hibernate.dialect.H2Dialect
+  # database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+
   liquibase:
     enabled: false
 security:

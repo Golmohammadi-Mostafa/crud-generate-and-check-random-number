@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Sep 10 15:45:49 IRDT 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017b-cf6b-bb1e-00000c7a1520 
+on database directory D:\myGitHubprojects\crud-generate-and-check-random-number\local with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@77556fd 
+Loaded from file:/C:/Users/Mostafa/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11+28
+user.dir=D:\myGitHubprojects\crud-generate-and-check-random-number
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
